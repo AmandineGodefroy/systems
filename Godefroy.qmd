@@ -11,7 +11,6 @@ format: html
 # Question 3
 
 ```{r configuration}
-#| eval: false
 #| echo: false
 #| warning: false
 #| message: false
@@ -28,7 +27,7 @@ i_am("systems.Rproj")
 # importation of the main data set
 listsystems <- vroom(here("data/listsytems.csv"), locale=locale(decimal_mark=','), show_col_types = FALSE)
 ```
-In this data set we have `r nrow()` star systems and `r ncol()` variables.
+In this data set we have `r nrow(listsystems)` star systems and `r ncol(listsystems)` variables.
 ```{r}
 if (nrow(listsystems) == 1057) {print('We have the correct number of variables')} else {print('There is a problem with the number of variables')}
 if (ncol(listsystems) == 8) {print('We have the correct number of star systems')} else {print('There is a problem with the number of star systems')}
@@ -69,5 +68,15 @@ table_listsystems <- listsystems |>
     "Nb of missing values for the effective temperature" = na_temperature, "Nb of observations with at least one missing value" = sum(!complete.cases(listsystems))
   )
 knitr::kable(table_listsystems)
+```
+# Question 5
+
+```{r}
+#| warning: false
+# We use a scatter plot
+ggplot(listsystems, aes(x = `Star Radius`, y = `EFFECTIVE TEMPERATURE`)) +
+  geom_point(alpha = 0.2) +
+  xlab("Star Radius") +
+  ylab("Effective Temperature")
 ```
 
