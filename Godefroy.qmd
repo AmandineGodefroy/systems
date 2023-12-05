@@ -154,3 +154,25 @@ knitr::kable(table_fakefaction)
 # Question 10
 
 There are `r nrow(listsystems)-nrow(systemcontrol)` number of star systems that cannot be found in the SYSTEM_CONTROL.csv file.
+
+# Question 11
+```{r}
+# fusionnons les bases system control et thefactions
+starsystems <- inner_join(systemcontrol, thefactions, by=join_by(Fkey))
+```
+```{r}
+nb_of_system_by_faction <- starsystems |> count(Fkey) 
+
+starsystems <- inner_join(starsystems, nb_of_system_by_faction, by=join_by(Fkey))
+
+starsystems|> rename(nb_system_by_faction = n)
+
+```
+
+```{r}
+ggplot(starsystems, aes(x = `FACTION NAME`, y = n)) +
+  geom_point(alpha = 0.2) +
+  xlab("factions name") +
+  ylab("nber of system by faction")
+```
+
