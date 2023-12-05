@@ -8,3 +8,39 @@ format: html
 
 [Link github repository](https://github.com/AmandineGodefroy/systems)
 
+# Question 3
+
+```{r configuration}
+#| eval: false
+#| echo: false
+#| warning: false
+#| message: false
+
+library(here)
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(vroom)
+i_am("systems.Rproj")
+```
+
+```{r}
+# importation of the main data set
+listsystems <- vroom(here("data/listsytems.csv"), locale=locale(decimal_mark=','), show_col_types = FALSE)
+```
+In this data set we have `r nrow()` star systems and `r ncol()` variables.
+```{r}
+if (nrow(listsystems) == 1057) {print('We have the correct number of variables')} else {print('There is a problem with the number of variables')}
+if (ncol(listsystems) == 8) {print('We have the correct number of star systems')} else {print('There is a problem with the number of star systems')}
+```
+
+```{r}
+# Verification that all the numerical variables are recognized as numerical variables
+is.numeric(listsystems$Star_key)
+is.numeric(listsystems$distance)
+is.numeric(listsystems$`EFFECTIVE TEMPERATURE`)
+is.numeric(listsystems$`Relative Mass`)
+is.numeric(listsystems$`Star Radius`)
+is.numeric(listsystems$`RELATIVE LUMINOSITY`)
+```
+We find that that all the numerical variables are recognised as numerical variables.
