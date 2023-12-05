@@ -44,3 +44,30 @@ is.numeric(listsystems$`Star Radius`)
 is.numeric(listsystems$`RELATIVE LUMINOSITY`)
 ```
 We find that that all the numerical variables are recognised as numerical variables.
+
+# Question 4
+```{r}
+# Number of missing values for each variable 
+na_key <-sum(is.na(listsystems$Star_key))
+na_name <-sum(is.na(listsystems$S_NAME))
+na_distance <-sum(is.na(listsystems$distance))
+na_temperature <-sum(is.na(listsystems$`EFFECTIVE TEMPERATURE`))
+na_mass <-sum(is.na(listsystems$`Relative Mass`))
+na_radius <-sum(is.na(listsystems$`Star Radius`))
+na_luminosity <-sum(is.na(listsystems$`RELATIVE LUMINOSITY`))
+na_type <-sum(is.na(listsystems$`Type Of Star`))
+
+```
+
+```{r}
+table_listsystems <- listsystems |>
+  summarise(
+    "Nb of observations" = nrow(listsystems),
+    "Nb of variables" = ncol(listsystems),
+    "Nb of missing values for the relative luminosity" = na_luminosity,
+    "Nb of missing values for the star radius" = na_radius,
+    "Nb of missing values for the effective temperature" = na_temperature, "Nb of observations with at least one missing value" = sum(!complete.cases(listsystems))
+  )
+knitr::kable(table_listsystems)
+```
+
