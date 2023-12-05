@@ -135,3 +135,20 @@ thefactions <- vroom(here("data/THE+FACTIONS.csv"), locale=locale(decimal_mark='
 systemcontrol <- vroom(here("data/SYSTEM_CONTROL.csv"), locale=locale(decimal_mark=','), show_col_types = FALSE)
 ```
 
+# Question 9
+
+```{r}
+# we must put NA for the missing values
+thefactions <- thefactions %>% mutate_all(~na_if(.,"xx"))
+```
+
+```{r}
+table_fakefaction <- systemcontrol |>
+  summarise(
+    "Nb of abandoned star systems" = sum(systemcontrol$Fkey == "A"),
+    "Nb of independent systems" = sum(systemcontrol$Fkey == "I"),
+    "Nb of undiscovered systems" = sum(systemcontrol$Fkey == "U")
+    )
+knitr::kable(table_fakefaction)
+```
+
