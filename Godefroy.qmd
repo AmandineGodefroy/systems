@@ -151,4 +151,6 @@ table_fakefaction <- systemcontrol |>
     )
 knitr::kable(table_fakefaction)
 ```
+# Question 10
 
+There are `r nrow(listsystems)-nrow(systemcontrol)` number of star systems that cannot be found in the SYSTEM_CONTROL.csv file.
