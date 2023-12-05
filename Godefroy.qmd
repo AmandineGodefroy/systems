@@ -80,3 +80,51 @@ ggplot(listsystems, aes(x = `Star Radius`, y = `EFFECTIVE TEMPERATURE`)) +
   ylab("Effective Temperature")
 ```
 
+# Question 6
+```{r}
+#| echo: false
+# We compute which stars are the most extreme for each variables
+min_distance <- which.min(listsystems$distance)
+min_distance_name <- listsystems$S_NAME[min_distance]
+max_distance <- which.max(listsystems$distance)
+max_distance_name <- listsystems$S_NAME[max_distance]
+
+min_temperature <- which.min(listsystems$`EFFECTIVE TEMPERATURE`)
+min_temperature_name <- listsystems$S_NAME[min_temperature]
+max_temperature <- which.max(listsystems$`EFFECTIVE TEMPERATURE`)
+max_temperature_name <- listsystems$S_NAME[max_temperature]
+
+min_mass <- which.min(listsystems$`Relative Mass`)
+min_mass_name <- listsystems$S_NAME[min_mass]
+max_mass <- which.max(listsystems$`Relative Mass`)
+max_mass_name <- listsystems$S_NAME[max_mass]
+
+min_radius <- which.min(listsystems$`Star Radius`)
+min_radius_name <- listsystems$S_NAME[min_radius]
+max_radius <- which.max(listsystems$`Star Radius`)
+max_radius_name <- listsystems$S_NAME[max_radius]
+
+min_luminosity <- which.min(listsystems$`RELATIVE LUMINOSITY`)
+min_luminosity_name <- listsystems$S_NAME[min_luminosity]
+max_luminosity <- which.max(listsystems$`RELATIVE LUMINOSITY`)
+max_luminosity_name <- listsystems$S_NAME[max_luminosity]
+```
+
+
+```{r}
+table_extreme <- listsystems |>
+  summarise(
+    "Star with the min distance" = min_distance_name,
+    "Star with the max distance" = max_distance_name,
+    "Star with the min temperature" = min_temperature_name,
+    "Star with the max temperature" = max_temperature_name,
+    "Least massive star" = min_mass_name,
+    "Most massive star" = max_mass_name,
+    "Star the least radius" = min_radius_name,
+    "Star the most radius" = max_radius_name,
+    "Star with the least luminosity" = min_luminosity_name,
+    "Star with the most luminosity" = max_luminosity_name
+  )
+knitr::kable(table_extreme)
+```
+
